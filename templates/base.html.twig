@@ -1,0 +1,80 @@
+{% set current_path = app.request.getPathInfo() %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}Bienvenue !{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    {#   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   #}
+    {{ encore_entry_link_tags('app') }}
+</head>
+<body>
+
+<div class="navbar navbar-expand-lg navbar-dark  bg-primary">
+    <div class="container d-flex justify-content-between">
+        <a href="{{ path("home") }}" class="navbar-brand">Agence Immobilière</a>
+        <span class="navbar-text">
+       <a href="{{ path("property.index") }}" class="btn btn-primary">Acheter</a>
+
+                                {% if app.user %}
+                                    <a href="{{ path("admin.property.index") }}" class="btn btn-primary">Tableau de bord</a>
+
+                                {% endif %}
+
+    </span>
+    </div>
+</div>
+{% if current_path == "/" %}
+    <section class="jumbotron text-center" id="homePageSection">
+        <div class="container">
+            <h1 class="jumbotron-heading">Agence immobilière à Tunis, Tunisie</h1>
+            <p class="lead text-muted">Nous sommes agence immobilière nationale agréée par l’Etat Tunisien. Elle est
+                également le Premier Réseau de négociateurs en immobilier dont l’activité couvre toute la TUNISIE.
+
+                Des agences immobilières nouvelle génération, avec une équipe d'agents immobiliers sur qui il faut
+                compter pour votre projet d'achat ou de location en Tunisie !
+
+                Nous vous proposons tous les métiers de l’immobilier : la transaction, la gestion et la location de
+                maisons, appartements, immeubles, terrains, fonds de commerce, les montages de défiscalisation……</p>
+            <p>
+                <a href="{{ path("property.index") }}" class="btn btn-primary">Acheter</a>
+
+            </p>
+        </div>
+    </section>
+{% endif %}
+
+{% block body %}{% endblock %}
+<footer class="bg-dark bg-primary">
+    <p class="lead text-muted text-center ">Made by SBH™ • © 2020 - Données personnelles</p>
+
+</footer>
+<!-- Footer -->
+{% block javascripts %}{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>#}
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+{{ encore_entry_script_tags('app') }}
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+<script>
+    $(window).scroll(function () {
+        if ($(document).scrollTop() > 50) {
+            $('.nav').addClass('affix');
+            console.log("OK");
+        } else {
+            $('.nav').removeClass('affix');
+        }
+    });
+</script>
+{{ encore_entry_script_tags('app') }}
+</body>
+</html>

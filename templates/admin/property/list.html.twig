@@ -1,0 +1,45 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block title 'Gérer les biens' %}
+{% block body %}
+
+    <div class="container mt-4">
+
+        <h1>Gérer les biens</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <table id="dt-select" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for property in  properties %}
+                <tr>
+                    <td>{{ property.title }}</td>
+                    <td>{{ property.description }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{{ path("admin.property.edit",{id: property.id}) }}"
+                               class="btn btn-outline-secondary">Editer</a>
+                            <form method="post" action="{{ path('admin.property.remove',{id: property.id}) }}"
+                                  style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr?')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('DELETE' ~ property.id) }}">
+                                <button class="btn btn-outline-danger">Supprimer</button>
+                            </form>
+                        </div>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

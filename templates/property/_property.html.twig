@@ -1,0 +1,20 @@
+
+        {% if property.filename %}
+            <img class="card-img-top" src=" {{ vich_uploader_asset(property,'imageFile') }}" alt="card-img-top" style="height: 280px; width: 100%; display: block;">
+
+        {% else %}
+            <img class="card-img-top" src=" {{ '/images/properties/empty.jpg' }}" alt="card-img-top" style="height: 280px; width: 100%; display: block;">
+
+        {% endif %}
+
+            <h5 class="card-title"><a
+                        href="{{ path('property.show',{id:property.id, slug: property.slug}) }}">{{ property.title }} </a>
+            </h5>
+            <p class="card-text">{{ property.surface }} m²</p>
+            <p class="card-text">{{ property.city }}</p>
+            <p class="card-text">{{ property.postalCode }}</p>
+        <div class="card-footer">
+            <div class="text-primary" style="font-weight: bold">{{ property.formattedPrice }} DT</div>
+        </div>
+
+

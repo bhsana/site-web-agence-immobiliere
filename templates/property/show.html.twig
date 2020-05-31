@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path("home") }}">Agence immobilière</a></li>
+            <li class="breadcrumb-item"><a href="{{ path("property.index") }}">Acheter</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ property.title }}</li>
+        </ol>
+    </nav>
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-md-8">
+
+                    {% if property.filename %}
+                        <img src=" {{ vich_uploader_asset(property,'imageFile') }}" alt="card-img-top"
+                             style="width: 100%;length: auto">
+
+                    {% else %}
+                        <img src=" {{ '/images/properties/empty.jpg' }}" alt="card-img-top"
+                             style="width: 100%;length: auto">
+
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <h1>{{ property.title }}</h1>
+                    <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
+                    <div class="text-primary" style="font-size: 4rem;font-weight: bold">{{ property.getFormattedPrice }}
+                        DT
+                    </div>
+
+                    <div class="alert alert-dark" role="alert">
+                        <h6>Pour plus d'informations veuillez nous contacter </h6>
+                        <p>Tel: +216 50 254 158</p>
+                        <p>email: test@test.com</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    <div class="container p-4">
+
+        <p>
+            {{ property.description | nl2br }}
+        </p>
+
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-striped">
+                    <tr>
+                        <td><b>Surface habitable</b></td>
+                        <td>{{ property.surface }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Pièces</b></td>
+                        <td>{{ property.rooms }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Chambres</b></td>
+                        <td>{{ property.bedrooms }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Etage</b></td>
+                        <td>{{ property.floor }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Chauffage</b></td>
+                        <td>{{ property.heatType }}</td>
+                    </tr>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

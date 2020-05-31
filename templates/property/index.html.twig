@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title 'Tous nos biens' %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path("home") }}">Agence immobilière</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Acheter</li>
+        </ol>
+    </nav>
+        <div class="container  d-flex justify-content-center">
+            {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">
+                    {{ form_row(form.minSurface) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <button class="btn btn-primary">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+    <div class="container mt-4">
+        <h1>Consulter la liste de nos biens</h1>
+        <div class="card-deck">
+            <div class="container">
+                <div class="row">
+                    <div class="container">
+                        <div class="row" style=" padding: 5%;">
+                            {% for property in properties %}
+                                <div class="col-md-4">
+                                    {% include'property/_property.html.twig' %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(properties) }}
+    </div>
+    </div>
+{% endblock %}
